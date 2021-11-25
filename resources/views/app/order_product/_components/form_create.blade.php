@@ -8,5 +8,8 @@
                         
 </select>
 {{ $errors->has('product_id') ? $errors->first('product_id') : '' }}
+
+<input type="number" name="quantity" value="{{ old('quantity') ? old('quantity') : '' }}" placeholder="Quantity" class="borda-preta">
+{{ $errors->has('quantity') ? $errors->first('quantity') : '' }}
 <button type="submit" class="borda-preta">Add New</button>
 </form>

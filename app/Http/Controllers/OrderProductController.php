@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\OrderProduct;
+use App\Models\Customer;
 
 class OrderProductController extends Controller
 {
@@ -25,10 +26,11 @@ class OrderProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create(Order $order)
-    {
+    {   
+        $customer = Customer::first();
         $products = Product::all();
         $order->products;
-        return view('app.order_product.create', ['order' => $order, 'products' => $products]);
+        return view('app.order_product.create', ['order' => $order, 'customer' => $customer, 'products' => $products]);
         
     }
 
@@ -41,7 +43,8 @@ class OrderProductController extends Controller
     public function store(Request $request, Order $order)
     {
         $rules = [
-            'product_id' => 'exists:products,id'
+            'product_id' => 'exists:products,id',
+            'quantity' => 'required|integer'
         ];
 
         $feedback = [
@@ -49,12 +52,17 @@ class OrderProductController extends Controller
         ];
 
         $request->validate($rules, $feedback);
-        echo $order->id.' - '.$request->get('product_id');
+    
 
-        $orderProduct = new OrderProduct();
-        $orderProduct->order_id = $order->id;
-        $orderProduct->product_id = $request->get('product_id');
-        $orderProduct->save();
+        // $orderProduct = new OrderProduct();
+        // $orderProduct->order_id = $order->id;
+        // $orderProduct->product_id = $request->get('product_id');
+        // $orderProduct->save();
+
+        $order->products()->attach(
+            $request->get('product_id'),
+            ['quantity' => $request->get('quantity')]
+        );
 
         return redirect()->route('order-product.create', ['order' => $order->id]);
     }
@@ -99,8 +107,15 @@ class OrderProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(OrderProduct $orderProduct, $order_id)
     {
-        //
+        // print_r($order->getAttributes());
+        // echo '<hr>';
+        // print_r($product->getAttributes());
+
+        // $order->products()->detach($product->id);
+
+        $orderProduct->delete();
+        return redirect()->route('order-product.create', ['order' => $order_id]);
     }
 }

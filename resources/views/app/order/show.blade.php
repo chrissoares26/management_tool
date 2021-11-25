@@ -18,7 +18,7 @@
         <div class="informacao-pagina">
         <h4>Order Details</h4>
                <p>Order ID: {{ $order->id }}</p>
-               <p>Customer: {{ $customer->name }}</p>
+               <p>Customer: {{ $order->customer->name}}</p>
             <div style="width: 30%; margin-left: auto; margin-right: auto;">
             <h4>Order Items</h4>
             <table border="1" width="100%">
@@ -27,7 +27,7 @@
                     <th>ID</th>
                     <th>Product Name</th>
                     <th>Order Date</th>
-                    <th></th>
+                    {{-- <th></th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -36,17 +36,16 @@
                     <td>{{$product->id}}</td>
                     <td>{{$product->name}}</td>
                     <td>{{$product->pivot->created_at->format('m/d/Y')}}</td>
-                    <td><form id="form_{{$product->pivot->id}}" method="post" action="{{route('order-product.destroy', ['orderProduct' => $product->pivot->id, 'order_id' => $order->id ])}}">
+                    {{-- <td><form id="form_{{$product->pivot->id}}" method="post" action="{{route('order-product.destroy', ['orderProduct' => $product->pivot->id, 'order_id' => $order->id ])}}">
                     @method('DELETE')
                     @csrf
-                    <a href="#" onclick="document.getElementById('form_{{$product->pivot->id}}').submit()">Delete</a></form></td>
+                    <a href="#" onclick="document.getElementById('form_{{$product->pivot->id}}').submit()">Delete</a></form></td> --}}
                 </tr>
              @endforeach
             </tbody>
             
             </table>
-               @component('app.order_product._components.form_create', ['order' => $order, 'products' => $products])
-               @endcomponent
+               
                 
             </div>
         </div>

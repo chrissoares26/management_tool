@@ -10,6 +10,12 @@ class Order extends Model
     use HasFactory;
 
     public function products() {
-        return $this->belongsToMany('App\Models\Item', 'order_products', 'order_id', 'product_id')->withPivot('created_at');
+        return $this->belongsToMany('App\Models\Item', 'order_products', 'order_id', 'product_id')->withPivot('id', 'created_at', 'updated_at');
     }
+    
+    public function customer() {
+        return $this->belongsTo('App\Models\Customer');
+    }
+
+
 }

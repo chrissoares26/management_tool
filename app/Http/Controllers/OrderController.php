@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\Product;
+
+use DB;
 
 class OrderController extends Controller
 {
@@ -15,8 +18,15 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
+        // $customer = DB::table('customers')
+        //     ->join('orders', 'customers.id', '=', 'orders.customer_id')
+        //     ->select('customers.name')
+        //     ->get();
+
+        $customer = Order::with(['customer'])->paginate(10);
+      
         $orders = Order::paginate(10);
-        return view('app.order.index', ['orders' => $orders, 'request' => $request->all()]);
+        return view('app.order.index', ['orders' => $orders, 'customer' => $customer, 'request' => $request->all()]);
     }
 
     /**
@@ -61,9 +71,13 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        //
+        $customer = Order::with(['customer'])->paginate(10);
+        $products = Product::all();
+        $order->products;
+       
+        return view('app.order.show', ['order' => $order, 'customer' => $customer, 'products' => $products]);
     }
 
     /**

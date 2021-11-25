@@ -5,13 +5,13 @@
 @section('content')
     <div class="conteudo-pagina">
         <div class="titulo-pagina-2">
-            <p>Product - List</p>
+            <p>List of Product</p>
         </div>
 
         <div class="menu">
             <ul>
                 <li><a href="{{ route('product.create') }}">Add New</a></li>
-                <li><a href="">Search</a></li>
+                
             </ul>
         </div>
 
@@ -60,7 +60,7 @@
                                     <td colspan="12">
                                         <p>Orders</p>
                                         @foreach ($product->orders as $order )
-                                            <a href="{{route('order-product.create', ['order' => $order->id])}}">
+                                            <a href="{{route('order.show', ['order' => $order->id])}}">
                                                 Order: {{ $order->id }}, 
                                             </a>
                                            

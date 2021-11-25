@@ -11,7 +11,7 @@
         <div class="menu">
             <ul>
                 <li><a href="{{ route('product.index') }}">Go Back</a></li>
-                <li><a href="{{ route('product.index') }}">Search</a></li>
+                
             </ul>
         </div>
 

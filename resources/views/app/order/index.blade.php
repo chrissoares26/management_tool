@@ -11,7 +11,7 @@
         <div class="menu">
             <ul>
                 <li><a href="{{ route('order.create') }}">Add New</a></li>
-                <li><a href="">Search</a></li>
+                {{-- <li><a href="">Search</a></li> --}}
             </ul>
         </div>
 
@@ -25,7 +25,8 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th></th>
+                            {{-- <th></th> --}}
+                            
                         
                         </tr>
                     </thead>
@@ -33,7 +34,7 @@
                             @foreach ($orders as $order )
                                 <tr>
                                     <td>{{ $order->id}}</td>
-                                    <td> {{ $order->customer_id}}</td>
+                                    <td> {{ $order->customer->name}}</td>
                                     <td><a href="{{ route('order-product.create', ['order' => $order->id])}}">Add Product</a></td>
                                     <td><a href="{{ route('order.show', ['order' => $order->id])}}">View</a></td>
                                     <td>
@@ -43,7 +44,7 @@
                                         <a href="#" onclick="document.getElementById('form_{{ $order->id }}').submit()">Delete</a>
                                         </form>
                                     </td>
-                                    <td><a href="{{ route('order.edit', ['order' => $order->id])}}">Edit</a></td>
+                                    {{-- <td><a href="{{ route('order.edit', ['order' => $order->id])}}">Edit</a></td> --}}
                                     
                                 </tr>
                             @endforeach

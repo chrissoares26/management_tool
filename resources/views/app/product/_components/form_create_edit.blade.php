@@ -32,5 +32,9 @@
                         
                     </select>
                     {{ $errors->has('unit_id') ? $errors->first('unit_id') : '' }}
-                    <button type="submit" class="borda-preta">Add New</button>
+                    @if(isset($product->id))
+                    <button type="submit" class="borda-preta">Update</button>
+                    @else 
+                    <button type="submit" class="borda-preta">Add new</button>
+                    @endif
                 </form>

@@ -52,7 +52,7 @@ Route::middleware('authentication:standard')->prefix('/app')->group(function() {
 
     Route::get('order-product/create/{order}', 'App\Http\Controllers\OrderProductController@create')->name('order-product.create');
     Route::post('order-product/store/{order}', 'App\Http\Controllers\OrderProductController@store')->name('order-product.store');
-
+    Route::delete('order-product.destroy/{orderProduct}/{order_id}','App\Http\Controllers\OrderProductController@destroy' )->name('order-product.destroy');
 });
 
 Route::get('/test/{p1}/{p2}', 'App\Http\Controllers\TestController@test')->name('test');

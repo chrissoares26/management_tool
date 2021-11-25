@@ -17,7 +17,7 @@
 
         <div class="informacao-pagina">
             <div style="width: 30%; margin-left: auto; margin-right: auto;">
-                @component('app.customer._components.form_create_edit')
+                @component('app.customer._components.form_create_edit', ['customer' => $customer])
                 @endcomponent
                 
             </div>

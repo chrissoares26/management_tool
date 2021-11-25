@@ -11,7 +11,6 @@
         <div class="menu">
             <ul>
                 <li><a href="{{ route('customer.create') }}">Add New</a></li>
-                <li><a href="">Search</a></li>
             </ul>
         </div>
 
@@ -21,6 +20,7 @@
                     <thead>
                         <tr>
                             <th>Name</th>
+                            <th></th>
                             <th></th>
                             <th></th>
                         
